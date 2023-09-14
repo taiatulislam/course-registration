@@ -7,6 +7,7 @@ function App() {
 
   const [bookmarks, setBookmarks] = useState([])
   const [creditAvailable, setCreditAvailable] = useState(0)
+  const [price, setPrice] = useState(0)
 
   const handleSelect = course => {
     const isAvailable = bookmarks.find(bookmark => bookmark.id === course.id)
@@ -20,6 +21,7 @@ function App() {
     else {
       setBookmarks([...bookmarks, course]);
       setCreditAvailable(creditAvailable + course.credit)
+      return setPrice(price + course.price)
     }
 
   }
@@ -29,7 +31,7 @@ function App() {
       <h1 className='text-3xl font-bold text-[#1C1B1B] text-center pb-10'>Course Registration</h1>
       <div className='grid grid-cols-4 gap-5'>
         <div className='col-span-3'><Courses handleSelect={handleSelect}></Courses></div>
-        <div className='col-span-1'><Bookmarks bookmarks={bookmarks} creditAvailable={creditAvailable}></Bookmarks></div>
+        <div className='col-span-1'><Bookmarks bookmarks={bookmarks} creditAvailable={creditAvailable} price={price}></Bookmarks></div>
       </div>
     </div>
   )
