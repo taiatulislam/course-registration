@@ -9,6 +9,7 @@ function App() {
 
   const [bookmarks, setBookmarks] = useState([])
   const [creditAvailable, setCreditAvailable] = useState(0)
+  const [creditRemaining, setCreditRemaining] = useState(20)
   const [price, setPrice] = useState(0)
 
   const handleSelect = course => {
@@ -41,6 +42,7 @@ function App() {
     else {
       setBookmarks([...bookmarks, course]);
       setCreditAvailable(creditAvailable + course.credit)
+      setCreditRemaining(creditRemaining - course.credit)
       setPrice(price + course.price)
       return toast.success('Course successfully added!', {
         position: "bottom-right",
@@ -61,7 +63,7 @@ function App() {
       <h1 className='text-3xl font-bold text-[#1C1B1B] text-center pb-10'>Course Registration</h1>
       <div className='grid grid-cols-4 gap-5'>
         <div className='col-span-3'><Courses handleSelect={handleSelect}></Courses></div>
-        <div className='col-span-1'><Bookmarks bookmarks={bookmarks} creditAvailable={creditAvailable} price={price}></Bookmarks></div>
+        <div className='col-span-1'><Bookmarks bookmarks={bookmarks} creditAvailable={creditAvailable} creditRemaining={creditRemaining} price={price}></Bookmarks></div>
       </div>
       <ToastContainer position="bottom-right"
         autoClose={3000}
