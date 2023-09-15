@@ -59,10 +59,10 @@ function App() {
   }
 
   return (
-    <div>
+    <div className='py-7 px-5 lg:px-16'>
       <h1 className='text-3xl font-bold text-[#1C1B1B] text-center pb-10'>Course Registration</h1>
-      <div className='grid grid-cols-4 gap-5'>
-        <div className='col-span-3'><Courses handleSelect={handleSelect}></Courses></div>
+      <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-5'>
+        <div className='md:col-span-1 lg:col-span-3'><Courses handleSelect={handleSelect}></Courses></div>
         <div className='col-span-1'><Bookmarks bookmarks={bookmarks} creditAvailable={creditAvailable} creditRemaining={creditRemaining} price={price}></Bookmarks></div>
       </div>
       <ToastContainer position="bottom-right"
