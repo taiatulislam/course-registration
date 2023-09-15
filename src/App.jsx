@@ -2,6 +2,8 @@ import { useState } from 'react'
 import './App.css'
 import Bookmarks from './Components/Bookmark/Bookmarks'
 import Courses from './Components/Courses/Courses'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -13,15 +15,43 @@ function App() {
     const isAvailable = bookmarks.find(bookmark => bookmark.id === course.id)
 
     if (creditAvailable + course.credit > 20) {
-      return alert('Credit can not be taken more than 20');
+      return toast.error("Credit can not be taken more than 20!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })
     }
     else if (isAvailable) {
-      return alert('Already selected');
+      return toast.error("Course already added!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })
     }
     else {
       setBookmarks([...bookmarks, course]);
       setCreditAvailable(creditAvailable + course.credit)
-      return setPrice(price + course.price)
+      setPrice(price + course.price)
+      return toast.success('Course successfully added!', {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
 
   }
@@ -33,7 +63,17 @@ function App() {
         <div className='col-span-3'><Courses handleSelect={handleSelect}></Courses></div>
         <div className='col-span-1'><Bookmarks bookmarks={bookmarks} creditAvailable={creditAvailable} price={price}></Bookmarks></div>
       </div>
-    </div>
+      <ToastContainer position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light" />
+    </div >
   )
 }
 
